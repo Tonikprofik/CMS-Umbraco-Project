@@ -37,6 +37,14 @@ namespace CmsL3.Controllers
 
             TempData["success"] = true;
 
+            //saving data to umbraco backend Les4 Ex2 - 2.
+            IContent comment = Services.ContentService.Create(model.Subject, CurrentPage.Id, "comment");
+            comment.SetValue("username", model.Name);
+            comment.SetValue("email", model.Email);
+            comment.SetValue("subject", model.Subject);
+            comment.SetValue("message", model.Message);
+            Services.ContentService.Save(comment);
+
             return RedirectToCurrentUmbracoPage();
         }
     }
